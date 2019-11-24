@@ -1,0 +1,55 @@
+group 'gbk.api.restassured'
+version '1.0-SNAPSHOT'
+
+import static java.lang.System.properties
+
+buildscript {
+    ext.REST_ASSURED_VERSION = "4.1.2"
+
+    repositories {
+        maven {
+            url 'https://repo1.maven.org/maven2/'
+        }
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url 'https://repo1.maven.org/maven2/'
+    }
+}
+
+
+
+dependencies {
+
+    testImplementation(
+            'io.rest-assured:rest-assured:' + REST_ASSURED_VERSION,
+            'io.rest-assured:json-schema-validator:' + REST_ASSURED_VERSION,
+            'io.rest-assured:json-path:' + REST_ASSURED_VERSION,
+            'junit:junit:4.12',
+            'org.seleniumhq.selenium:selenium-java:3.141.5',
+            'com.google.code.gson:gson:2.8.5',
+            'com.github.javafaker:javafaker:0.13',
+            'org.assertj:assertj-core:3.13.2',
+            'org.apache.logging.log4j:log4j-api:2.12.0',
+            'org.apache.logging.log4j:log4j-core:2.12.0',
+    )
+
+}
+
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties getProperties() as HashMap<String, ?>
+    useJUnit()
+}
+
+gradle.startParameter.continueOnFailure = true
